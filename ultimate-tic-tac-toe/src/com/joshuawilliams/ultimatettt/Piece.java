@@ -21,6 +21,10 @@ public class Piece {
 		return this.owner.equals(((Piece) other).owner);
 	}
 	
+	@Override public String toString() {
+		return getClass().getName() + "(" + owner.getIdentifier() + ")@" + Integer.toHexString(hashCode()); 
+	}
+	
 	public String getIdentifier() {
 		return owner.getIdentifier();
 	}

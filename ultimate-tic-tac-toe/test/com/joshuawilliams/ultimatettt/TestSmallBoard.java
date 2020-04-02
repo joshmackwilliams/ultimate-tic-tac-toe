@@ -13,8 +13,8 @@ class TestSmallBoard {
 	// Create a new board and new players before each test
 	@BeforeEach void init() {
 		board = new SmallBoard();
-		p1 = new TestingPlayer();
-		p2 = new TestingPlayer();
+		p1 = new TestingPlayer("P1");
+		p2 = new TestingPlayer("P2");
 	}
 	
 	@Test void testInitializes() {

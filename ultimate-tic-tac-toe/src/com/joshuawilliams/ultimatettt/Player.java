@@ -20,4 +20,8 @@ public abstract class Player {
 	public final Piece getPiece() {
 		return new Piece(this);
 	}
+	
+	@Override public String toString() {
+		return getClass().getName() + "(" + getIdentifier() + ")@" + Integer.toHexString(hashCode()); 
+	}
 }
