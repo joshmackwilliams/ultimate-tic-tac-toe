@@ -16,8 +16,9 @@ public class Piece {
 		this.owner = owner;
 	}
 	
-	public boolean equals(Piece other) {
-		return this.owner.equals(other.owner);
+	@Override public boolean equals(Object other) {
+		if(!(other.getClass() == Piece.class)) return false;
+		return this.owner.equals(((Piece) other).owner);
 	}
 	
 	public String getIdentifier() {

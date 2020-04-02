@@ -31,15 +31,22 @@ public class SmallBoard {
 	}
 	
 	public boolean isOccupied(int row, int col) {
-		return true;
+		return pieces[row][col] != null;
 	}
 	
 	public boolean isFull() {
+		for(int i = 0; i < height; i++) {
+			for(int j = 0; j < width; j++) {
+				if(pieces[i][j] == null) {
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 	
 	public void move(Piece piece, int row, int col) {
-		
+		pieces[row][col] = piece;
 	}
 	
 	public boolean hasWinner() {
