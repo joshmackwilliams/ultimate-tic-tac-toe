@@ -6,6 +6,9 @@ package com.joshuawilliams.ultimatettt;
  * actual game. Basically this is only used when a reference to a Player 
  * is needed but no Player subclass is being tested. See TestSmallBoard.java 
  * for an example use. 
+ * 
+ * In the future there may be a way to queue moves to be made by this class as 
+ * a way to test particular functions. 
  */
 
 public class TestingPlayer extends Player {

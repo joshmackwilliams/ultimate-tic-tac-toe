@@ -11,7 +11,7 @@ class TestSmallBoard {
 	private Player p2;
 	
 	// Create a new board and new players before each test
-	@BeforeEach void init() {
+	@BeforeEach void setUp() {
 		board = new SmallBoard();
 		p1 = new TestingPlayer("P1");
 		p2 = new TestingPlayer("P2");
