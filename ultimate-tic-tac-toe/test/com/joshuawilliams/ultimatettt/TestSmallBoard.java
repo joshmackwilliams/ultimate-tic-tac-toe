@@ -32,96 +32,80 @@ class TestSmallBoard {
 	}
 	
 	@Test void testCheckValidMove() {
-		assertTrue(board.isValidMove(0, 0));
+		assertTrue(board.isValidMove(0));
 	}
 	
 	// Check all bounds are enforced
 	@Test void testCheckOutOfBoundsMoves() {
-		assertFalse(board.isValidMove(-1, 0));
-		assertFalse(board.isValidMove(0, -1));
-		assertFalse(board.isValidMove(3, 0));
-		assertFalse(board.isValidMove(0, 3));
+		assertFalse(board.isValidMove(-1));
+		assertFalse(board.isValidMove(9));
 	}
 	
 	// Test that a basic move succeeds and leaves a corresponding piece
 	@Test void testFirstMoveSucceeds() {
-		assertFalse(board.isOccupied(0, 0));
-		board.move(p1.getPiece(), 0, 0);
-		assertTrue(board.isOccupied(0, 0));
-		assertEquals(p1.getPiece(), board.getPiece(0, 0));
+		assertFalse(board.isOccupied(0));
+		board.move(p1.getPiece(), 0);
+		assertTrue(board.isOccupied(0));
+		assertEquals(p1.getPiece(), board.getPiece(0));
 	}
 	
 	// Check that you can't move to an occupied space
 	@Test void testCheckOccupiedSpaceMove() {
-		assertTrue(board.isValidMove(0, 0));
-		board.move(p1.getPiece(), 0, 0);
-		assertFalse(board.isValidMove(0, 0));
+		assertTrue(board.isValidMove(0));
+		board.move(p1.getPiece(), 0);
+		assertFalse(board.isValidMove(0));
 		assertThrows(InvalidMoveException.class, () -> {
-			board.move(p2.getPiece(), 0, 0);
+			board.move(p2.getPiece(), 0);
 		});
 	}
 	
 	// Check that the winner detection won't trigger after a single move
 	@Test void testNoWinnerAfterOneMove() {
-		board.move(p1.getPiece(), 0, 0);
-		assertFalse(board.hasWinner());
+		board.move(p1.getPiece(), 0);
 		assertNull(board.getWinner());
+		assertFalse(board.hasWinner());
 	}
 	
 	// Test an example tied game scenario
 	@Test void testTiedGame() {
 		Player[] players = {p1, p2, p1, p2, p1, p2, p1, p2, p1};
-		int[] rows = {0, 0, 0, 1, 1, 1, 2, 2, 2};
-		int[] cols = {1, 0, 2, 1, 0, 2, 1, 0, 2};
-		SmallBoardTester.test(board, players, rows, cols);
+		int[] spaces = {0, 2, 1, 4, 5, 3, 6, 8, 7};
+		SmallBoardTester.test(board, players, spaces);
 		assertFalse(board.hasWinner());
 		assertNull(board.getWinner());
 	}
 	
-	// Test the top-left-to-bottom-right diagonal
-	@Test void testPlayerWinsDiagonal1() {
-		int[] rows = {0, 1, 2};
-		int[] cols = {0, 1, 2};
-		SmallBoardTester.test(board, p1, rows, cols);
-		assertTrue(board.hasWinner());
-		assertEquals(p1, board.getWinner());
+	// Test that the board correctly reports being full
+	@Test void testFull() {
+		Player[] players = {p1, p2, p1, p2, p1, p2, p1, p2, p1};
+		int[] spaces = {0, 2, 1, 4, 5, 3, 6, 8, 7};
+		SmallBoardTester.test(board, players, spaces);
+		assertTrue(board.isFull());
 	}
 	
-	// Test the other diagonal
-	@Test void testPlayerWinsDiagonal2() {
-		int[] rows = {2, 1, 0};
-		int[] cols = {0, 1, 2};
-		SmallBoardTester.test(board, p1, rows, cols);
+	// Test that a player can win
+	@Test void testPlayerWins() {
+		SmallBoardTester.test(board, p1, SmallBoard.winConditions[0]);
+		assertEquals(p1.getPiece(), board.getWinner());
 		assertTrue(board.hasWinner());
-		assertEquals(p1, board.getWinner());
-	}
-	
-	// Test that a player can win with a row
-	@Test void testPlayerWinsRow() {
-		int[] rows = {1, 1, 1};
-		int[] cols = {0, 1, 2};
-		SmallBoardTester.test(board, p1, rows, cols);
-		assertTrue(board.hasWinner());
-		assertEquals(p1, board.getWinner());
-	}
-	
-	// Test that a player can win with a column
-	@Test void testPlayerWinsColumn() {
-		int[] rows = {0, 1, 2};
-		int[] cols = {1, 1, 1};
-		SmallBoardTester.test(board, p1, rows, cols);
-		assertTrue(board.hasWinner());
-		assertEquals(p1, board.getWinner());
 	}
 	
 	// Test that when both players win, only the first player to hit the win condition 
 	// is considered the winner. 
 	@Test void testFirstPlayerWins() {
 		Player[] players = {p1, p2, p1, p2, p1, p2};
-		int[] rows = {0, 0, 1, 1, 2, 2};
-		int[] cols = {0, 1, 0, 1, 0, 1};
-		SmallBoardTester.test(board, players, rows, cols);
+		int[] spaces = {0, 3, 1, 4, 2, 5};
+		SmallBoardTester.test(board, players, spaces);
 		assertTrue(board.hasWinner());
-		assertEquals(p1, board.getWinner());
+		assertEquals(p1.getPiece(), board.getWinner());
+	}
+	
+	// Switch the players in the above test and make sure it still works
+	@Test void testFirstPlayerWins2() {
+		Player[] players = {p1, p2, p1, p2, p1, p2};
+		int[] spaces = {3, 0, 4, 1, 5, 2};
+		SmallBoardTester.test(board, players, spaces);
+		assertTrue(board.hasWinner());
+		assertEquals(p1.getPiece(), board.getWinner());
 	}
 }

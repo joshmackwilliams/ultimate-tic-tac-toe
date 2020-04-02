@@ -17,7 +17,7 @@ public class Piece {
 	}
 	
 	@Override public boolean equals(Object other) {
-		if(!(other.getClass() == Piece.class)) return false;
+		if(!(other instanceof Piece)) return false;
 		return this.owner.equals(((Piece) other).owner);
 	}
 	

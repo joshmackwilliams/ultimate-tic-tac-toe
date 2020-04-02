@@ -7,9 +7,16 @@ package com.joshuawilliams.ultimatettt;
  */
 
 public class SmallBoard {
+	public static int[][] winConditions = {
+		{0, 1, 2}, {3, 4, 5}, {6, 7, 8},
+		{0, 3, 6}, {1, 4, 7}, {2, 5, 8}, 
+		{0, 4, 8}, {2, 4, 6}
+	};
+	
 	private int height = 3;
 	private int width = 3;
-	private Piece[][] pieces = new Piece[height][width];
+	private Piece[] pieces = new Piece[height * width];
+	private Piece winner = null;
 	
 	public SmallBoard() {
 		
@@ -23,30 +30,30 @@ public class SmallBoard {
 		return width;
 	}
 	
-	public Piece getPiece(int row, int col) throws IndexOutOfBoundsException {
-		if(! boundsCheck(row, col)) { 
-			throw new IndexOutOfBoundsException("Invalid index " + row + ", " + col + " passed to SmallBoard"); 
+	public Piece getPiece(int space) throws IndexOutOfBoundsException {
+		if(! boundsCheck(space)) { 
+			throw new IndexOutOfBoundsException("Invalid index " + space + " passed to SmallBoard"); 
 		}
-		return pieces[row][col];
+		return pieces[space];
 	}
 	
-	public boolean isOccupied(int row, int col) {
-		return pieces[row][col] != null;
+	public boolean isOccupied(int space) {
+		return pieces[space] != null;
 	}
 	
 	public boolean isFull() {
-		for(int i = 0; i < height; i++) {
-			for(int j = 0; j < width; j++) {
-				if(pieces[i][j] == null) {
-					return false;
-				}
+		for(int i = 0; i < height * width; i++) {
+			if(pieces[i] == null) {
+				return false;
 			}
 		}
 		return true;
 	}
 	
-	public void move(Piece piece, int row, int col) {
-		pieces[row][col] = piece;
+	public void move(Piece piece, int space) {
+		if(! isValidMove(space)) throw new InvalidMoveException();
+		pieces[space] = piece;
+		if(winner == null) winner = calculateWinner();
 	}
 	
 	public boolean hasWinner() {
@@ -54,14 +61,30 @@ public class SmallBoard {
 	}
 	
 	public Piece getWinner() {
+		return winner;
+	}
+	
+	public boolean isValidMove(int space) {
+		return boundsCheck(space) && ! isOccupied(space);
+	}
+	
+	private boolean boundsCheck(int space) {
+		return space >= 0 && space < width * height;
+	}
+	
+	private Piece calculateWinner() {
+		for(int[] condition : winConditions) {
+			Piece checking = pieces[condition[0]];
+			if(checking == null) continue;
+			boolean winner = true;
+			for(int i = 1; i < condition.length; i++) {
+				if((pieces[condition[i]] == null) || (! pieces[condition[i]].equals(checking))) {
+					winner = false;
+					break;
+				}
+			}
+			if(winner) return checking;
+		}
 		return null;
-	}
-	
-	public boolean isValidMove(int row, int col) {
-		return boundsCheck(row, col) && ! isOccupied(row, col);
-	}
-	
-	private boolean boundsCheck(int row, int col) {
-		return (row >= 0) && (row < getHeight()) && (col >= 0) && (col < getWidth());
 	}
 }
