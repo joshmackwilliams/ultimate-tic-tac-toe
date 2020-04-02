@@ -1,6 +1,13 @@
 package com.joshuawilliams.ultimatettt;
 
+/*
+ * This class represents an ultimate tic-tac-toe board. It is 
+ * 9x9 spaces, made up of 9 3x3 standard tic-tac-toe boards. 
+ */
+
+//TODO Add test cases and implement
 public class Board {
+	
 	private int width = 3;
 	private int height = 3;
 	private SmallBoard[][] boards;

@@ -1,6 +1,14 @@
 package com.joshuawilliams.ultimatettt;
 
+/* 
+ * This class represents a move available to a player and serves to decouple 
+ * move-making logic from the inner workings of the board as well as to prevent 
+ * players from making multiple/invalid moves. 
+ */
+
+// TODO Add test cases and implement
 public class Move {
+	
 	public Move(Game game, Player activePlayer) {
 		
 	}

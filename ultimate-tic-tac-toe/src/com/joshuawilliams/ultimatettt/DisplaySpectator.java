@@ -6,6 +6,10 @@ package com.joshuawilliams.ultimatettt;
  * players. 
  */
 
-public class DisplaySpectator extends Spectator{
+//TODO Add test cases and implement
+public class DisplaySpectator extends Spectator {
 
+	@Override public void moveMade(Move move) {
+		
+	}
 }

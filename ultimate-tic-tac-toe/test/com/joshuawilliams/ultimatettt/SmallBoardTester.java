@@ -1,5 +1,11 @@
 package com.joshuawilliams.ultimatettt;
 
+/*
+ * This class is used for testing purposes only. It is designed to efficiently run a test 
+ * scenario by allowing the test cases to use arrays of move data rather than repeated calls 
+ * to Board.move(). 
+ */
+
 public class SmallBoardTester {
 	public static void test(SmallBoard board, Player player, int[] rows, int[] cols) {
 		for(int i = 0; i < rows.length; i++) {

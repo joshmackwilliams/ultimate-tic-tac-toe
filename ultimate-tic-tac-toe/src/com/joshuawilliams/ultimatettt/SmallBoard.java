@@ -1,5 +1,11 @@
 package com.joshuawilliams.ultimatettt;
 
+/*
+ * This class represents a standard, 3x3 tic-tac-toe board. In this project these 
+ * serve only to work with the standard Board, but they are stand-alone classes and 
+ * are independently tested, so they could be used in an ordinary tic-tac-toe game. 
+ */
+
 public class SmallBoard {
 	private int height = 3;
 	private int width = 3;

@@ -1,5 +1,11 @@
 package com.joshuawilliams.ultimatettt;
 
+/*
+ * This exception is thrown when a player attempts to make more than one move 
+ * using a single Move object. This will probably be caught by the Game and 
+ * the extra move will simply be ignored. 
+ */
+
 public class MultipleMovesException extends Exception {
 
 	private static final long serialVersionUID = -6635595108031074784L;

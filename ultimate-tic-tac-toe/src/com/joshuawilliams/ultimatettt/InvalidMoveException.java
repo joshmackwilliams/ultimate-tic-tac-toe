@@ -1,5 +1,12 @@
 package com.joshuawilliams.ultimatettt;
 
+/* 
+ * This exception is thrown when a player makes an invalid move. This could 
+ * be handled differently by various player classes. An AIPlayer might have 
+ * a fallback algorithm to use if its original move fails, while a HumanPlayer 
+ * could simply require the user to make another choice. 
+ */
+
 public class InvalidMoveException extends RuntimeException {
 
 	private static final long serialVersionUID = 8253815940987681482L;
