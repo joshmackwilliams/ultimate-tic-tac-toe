@@ -59,4 +59,20 @@ public class Board {
 	public Piece getWinner() {
 		return null;
 	}
+	
+	public boolean isFull() {
+		return true;
+	}
+	
+	public boolean checkMove(int board, int space) {
+		return true;
+	}
+
+	public boolean isValidMove(int board, int space) {
+		return true;
+	}
+
+	public boolean hasWinner(int board) {
+		return true;
+	}
 }
