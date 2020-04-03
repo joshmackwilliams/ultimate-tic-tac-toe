@@ -53,7 +53,7 @@ public class SmallBoard {
 	public void move(Piece piece, int space) {
 		if(! isValidMove(space)) throw new InvalidMoveException();
 		pieces[space] = piece;
-		if(winner == null) winner = calculateWinner();
+		if(! hasWinner()) winner = calculateWinner();
 	}
 	
 	public boolean hasWinner() {
@@ -68,8 +68,9 @@ public class SmallBoard {
 		return boundsCheck(space) && ! isOccupied(space);
 	}
 	
-	private boolean boundsCheck(int space) {
-		return space >= 0 && space < width * height;
+	// This is protected instead of private because it is used by the Board class
+	protected boolean boundsCheck(int space) {
+		return space >= 0 && space < getWidth() * getHeight();
 	}
 	
 	private Piece calculateWinner() {

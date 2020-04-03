@@ -32,15 +32,15 @@ class TestBoard {
 	}
 
 	@Test void testCheckValidMove() {
-		assertTrue(board.checkMove(0, 0));
+		assertTrue(board.isValidMove(0, 0));
 	}
 
 	// Check that all bounds are enforced
 	@Test void testCheckOutOfBoundsMoves() {
-		assertFalse(board.checkMove(0, -1));
-		assertFalse(board.checkMove(0, 9));
-		assertFalse(board.checkMove(-1, 0));
-		assertFalse(board.checkMove(9, 0));
+		assertFalse(board.isValidMove(0, -1));
+		assertFalse(board.isValidMove(0, 9));
+		assertFalse(board.isValidMove(-1, 0));
+		assertFalse(board.isValidMove(9, 0));
 	}
 
 	// Test that a basic move succeeds and leaves a corresponding piece
