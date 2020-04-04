@@ -35,6 +35,15 @@ class TestMove {
 		assertEquals(2, move.getSpace());
 	}
 	
-	
-
+	@Test void testRequiredBoardEnforced() throws InvalidMoveException, MultipleMovesException {
+		move.makeMove(1, 2);
+		move = new Move(board, player, move);
+		assertThrows(InvalidMoveException.class, () -> {
+			move.makeMove(3, 4);
+		});
+		assertFalse(move.isMade());
+		move.makeMove(2, 3);
+		assertTrue(move.isMade());
+		assertEquals(player.getPiece(), move.getPiece(2, 3));
+	}
 }
