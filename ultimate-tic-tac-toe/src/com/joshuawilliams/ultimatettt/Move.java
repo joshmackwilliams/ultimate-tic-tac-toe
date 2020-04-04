@@ -13,7 +13,8 @@ public class Move {
 	private Board board;
 	private Move lastMove;
 	
-	private boolean isMade;
+	// These will be set when a move is made
+	private boolean isMade = false;
 	private int moveBoard;
 	private int moveSpace;
 	
@@ -31,6 +32,10 @@ public class Move {
 	public void makeMove(int board, int space) throws MultipleMovesException, InvalidMoveException {
 		// Don't let the player make multiple moves
 		if(isMade()) throw new MultipleMovesException();
+		
+		// Don't let the player move anywhere other than the required board
+		if(hasRequiredBoard() && board != getRequiredBoard()) throw new InvalidMoveException(); 
+		
 		this.board.move(activePlayer.getPiece(), board, space);
 		moveBoard = board;
 		moveSpace = space;
