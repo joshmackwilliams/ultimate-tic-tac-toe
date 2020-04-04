@@ -14,7 +14,7 @@ package com.joshuawilliams.ultimatettt;
 public class TestingPlayer extends Player {
 	
 	public TestingPlayer(String identifier) {
-		this.identifier = identifier;
+		super(identifier);
 	}
 
 	@Override public void makeMove(Move move) {

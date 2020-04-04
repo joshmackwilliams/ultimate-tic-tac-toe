@@ -6,7 +6,6 @@ package com.joshuawilliams.ultimatettt;
  * players from making multiple/invalid moves. 
  */
 
-// TODO Add test cases
 public class Move {
 	
 	private Player activePlayer;
@@ -70,12 +69,13 @@ public class Move {
 		return moveSpace;
 	}
 	
-	// The rest of the methods in this class are simply passthroughs to the board
 	public boolean isValidMove(int board, int space) {
 		if(isMade()) return false;
+		if(hasRequiredBoard() && board != getRequiredBoard()) return false;
 		return this.board.isValidMove(board, space);
 	}
 	
+	// The rest of the methods in this class are simply passthroughs to the board
 	public boolean hasWinner(int board) {
 		return this.board.hasWinner(board);
 	}

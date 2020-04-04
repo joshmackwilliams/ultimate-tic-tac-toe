@@ -8,6 +8,10 @@ package com.joshuawilliams.ultimatettt;
 //TODO Add test cases and implement
 public class HumanPlayer extends Player {
 	
+	public HumanPlayer(String identifier) {
+		super(identifier);
+	}
+
 	@Override public void makeMove(Move move) {
 		
 	}

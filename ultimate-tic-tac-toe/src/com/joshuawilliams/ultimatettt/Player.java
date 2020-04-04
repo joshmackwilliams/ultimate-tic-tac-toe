@@ -11,7 +11,11 @@ package com.joshuawilliams.ultimatettt;
 public abstract class Player {
 	protected String identifier;
 	
-	public abstract void makeMove(Move move);
+	public abstract void makeMove(Move move) throws InvalidMoveException, MultipleMovesException;
+	
+	public Player(String identifier) {
+		this.identifier = identifier;
+	}
 
 	public final String getIdentifier() {
 		return identifier;

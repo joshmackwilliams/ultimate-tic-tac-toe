@@ -38,6 +38,7 @@ class TestMove {
 	@Test void testRequiredBoardEnforced() throws InvalidMoveException, MultipleMovesException {
 		move.makeMove(1, 2);
 		move = new Move(board, player, move);
+		assertFalse(move.isValidMove(3, 4));
 		assertThrows(InvalidMoveException.class, () -> {
 			move.makeMove(3, 4);
 		});

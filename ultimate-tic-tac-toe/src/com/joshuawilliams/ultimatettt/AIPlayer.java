@@ -9,6 +9,10 @@ package com.joshuawilliams.ultimatettt;
 //TODO Add test cases and implement
 public class AIPlayer extends Player {
 	
+	public AIPlayer(String identifier) {
+		super(identifier);
+	}
+
 	@Override public void makeMove(Move move) {
 		// TODO Add move logic
 	}

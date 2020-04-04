@@ -7,7 +7,6 @@ package com.joshuawilliams.ultimatettt;
  * to by checking for equality
  */
 
-// TODO Add test cases
 public class Piece {
 	
 	private Player owner;
