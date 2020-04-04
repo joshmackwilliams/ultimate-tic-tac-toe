@@ -42,7 +42,7 @@ class TestSmallBoard {
 	}
 	
 	// Test that a basic move succeeds and leaves a corresponding piece
-	@Test void testFirstMoveSucceeds() {
+	@Test void testFirstMoveSucceeds() throws InvalidMoveException, MultipleMovesException {
 		assertFalse(board.isOccupied(0));
 		board.move(p1.getPiece(), 0);
 		assertTrue(board.isOccupied(0));
@@ -50,7 +50,7 @@ class TestSmallBoard {
 	}
 	
 	// Check that you can't move to an occupied space
-	@Test void testCheckOccupiedSpaceMove() {
+	@Test void testCheckOccupiedSpaceMove() throws InvalidMoveException, MultipleMovesException {
 		assertTrue(board.isValidMove(0));
 		board.move(p1.getPiece(), 0);
 		assertFalse(board.isValidMove(0));
@@ -60,14 +60,14 @@ class TestSmallBoard {
 	}
 	
 	// Check that the winner detection won't trigger after a single move
-	@Test void testNoWinnerAfterOneMove() {
+	@Test void testNoWinnerAfterOneMove() throws InvalidMoveException, MultipleMovesException {
 		board.move(p1.getPiece(), 0);
 		assertNull(board.getWinner());
 		assertFalse(board.hasWinner());
 	}
 	
 	// Test an example tied game scenario
-	@Test void testTiedGame() {
+	@Test void testTiedGame() throws InvalidMoveException, MultipleMovesException {
 		Player[] players = {p1, p2, p1, p2, p1, p2, p1, p2, p1};
 		int[] spaces = {0, 2, 1, 4, 5, 3, 6, 8, 7};
 		SmallBoardTester.test(board, players, spaces);
@@ -76,7 +76,7 @@ class TestSmallBoard {
 	}
 	
 	// Test that the board correctly reports being full
-	@Test void testFull() {
+	@Test void testFull() throws InvalidMoveException, MultipleMovesException {
 		Player[] players = {p1, p2, p1, p2, p1, p2, p1, p2, p1};
 		int[] spaces = {0, 2, 1, 4, 5, 3, 6, 8, 7};
 		SmallBoardTester.test(board, players, spaces);
@@ -84,7 +84,7 @@ class TestSmallBoard {
 	}
 	
 	// Test that a player can win
-	@Test void testPlayerWins() {
+	@Test void testPlayerWins() throws InvalidMoveException, MultipleMovesException {
 		SmallBoardTester.test(board, p1, SmallBoard.winConditions[0]);
 		assertEquals(p1.getPiece(), board.getWinner());
 		assertTrue(board.hasWinner());
@@ -92,7 +92,7 @@ class TestSmallBoard {
 	
 	// Test that when both players win, only the first player to hit the win condition 
 	// is considered the winner. 
-	@Test void testFirstPlayerWins() {
+	@Test void testFirstPlayerWins() throws InvalidMoveException, MultipleMovesException {
 		Player[] players = {p1, p2, p1, p2, p1, p2};
 		int[] spaces = {0, 3, 1, 4, 2, 5};
 		SmallBoardTester.test(board, players, spaces);
@@ -101,7 +101,7 @@ class TestSmallBoard {
 	}
 	
 	// Switch the players in the above test and make sure it still works
-	@Test void testFirstPlayerWins2() {
+	@Test void testFirstPlayerWins2() throws InvalidMoveException, MultipleMovesException {
 		Player[] players = {p1, p2, p1, p2, p1, p2};
 		int[] spaces = {3, 0, 4, 1, 5, 2};
 		SmallBoardTester.test(board, players, spaces);

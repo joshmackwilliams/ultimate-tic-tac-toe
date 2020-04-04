@@ -5,7 +5,8 @@ package com.joshuawilliams.ultimatettt;
  * Example subclasses might include TerminalDisplay, GraphicalDisplay, 3DDisplay, etc.
  */
 
-//TODO Add test cases and implement
 public abstract class Display {
-
+	public abstract void getUserMove(Move move); // Get a move from a user 
+	public abstract void displayMove(Move move); // Display a completed move
+	public abstract void displayBoard(Board board); // Display a board state
 }

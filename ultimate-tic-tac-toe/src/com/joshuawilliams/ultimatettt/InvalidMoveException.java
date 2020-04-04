@@ -7,7 +7,7 @@ package com.joshuawilliams.ultimatettt;
  * could simply require the user to make another choice. 
  */
 
-public class InvalidMoveException extends RuntimeException {
+public class InvalidMoveException extends Exception {
 
 	private static final long serialVersionUID = 8253815940987681482L;
 

@@ -6,42 +6,88 @@ package com.joshuawilliams.ultimatettt;
  * players from making multiple/invalid moves. 
  */
 
-// TODO Add test cases and implement
+// TODO Add test cases
 public class Move {
 	
-	public Move(Game game, Player activePlayer) {
-		
+	private Player activePlayer;
+	private Board board;
+	private Move lastMove;
+	
+	private boolean isMade;
+	private int moveBoard;
+	private int moveSpace;
+	
+	public Move(Board board, Player activePlayer) {
+		this.board = board;
+		this.activePlayer = activePlayer;
 	}
 	
-	public void makeMove(int boardRow, int boardCol, int row, int col) {
-		
+	public Move(Board board, Player activePlayer, Move lastMove) {
+		this(board, activePlayer);
+		this.lastMove = lastMove;
 	}
 	
+	// Make a move, but not if this object has already been used to make a move
+	public void makeMove(int board, int space) throws MultipleMovesException, InvalidMoveException {
+		// Don't let the player make multiple moves
+		if(isMade()) throw new MultipleMovesException();
+		this.board.move(activePlayer.getPiece(), board, space);
+		moveBoard = board;
+		moveSpace = space;
+		isMade = true;
+	}
+	
+	// Whether or not this move requires a particular board
 	public boolean hasRequiredBoard() {
-		return true;
+		return (lastMove != null) && (! board.isFull(getRequiredBoard()));
 	}
 	
-	public int getRequiredBoardRow() {
-		return 0;
+	// Get the board required for this move
+	public int getRequiredBoard() {
+		if(lastMove == null) return -1;
+		return lastMove.getSpace();
 	}
 	
-	public int getRequiredBoardCol() {
-		return 0;
+	// Whether this object has already been used to make a move
+	public boolean isMade() {
+		return isMade;
 	}
 	
-	public Piece getWinner(int boardRow, int boardCol) {
-		return null;
+	// Return index of the board that this move was made on
+	public int getBoard() {
+		if(! isMade()) throw new MoveNotMadeException();
+		return moveBoard;
 	}
 	
-	public Piece getPiece(int boardRow, int boardCol, int row, int col) {
-		return null;
+	// Return the index of the space that this move was made on
+	public int getSpace() {
+		if(! isMade()) throw new MoveNotMadeException();
+		return moveSpace;
 	}
 	
-	public boolean isFull(int boardRow, int boardCol) {
-		return true;
+	// The rest of the methods in this class are simply passthroughs to the board
+	public boolean isValidMove(int board, int space) {
+		if(isMade()) return false;
+		return this.board.isValidMove(board, space);
 	}
 	
-	public boolean isOccupied(int boardRow, int boardCol, int row, int col) {
-		return true;
+	public boolean hasWinner(int board) {
+		return this.board.hasWinner(board);
+	}
+	
+	public Piece getWinner(int board) {
+		return this.board.getWinner(board);
+	}
+	
+	public Piece getPiece(int board, int space) {
+		return this.board.getPiece(board, space);
+	}
+	
+	public boolean isFull(int board) {
+		return this.board.isFull(board);
+	}
+	
+	public boolean isOccupied(int board, int space) {
+		return this.board.isOccupied(board, space);
 	}
 }

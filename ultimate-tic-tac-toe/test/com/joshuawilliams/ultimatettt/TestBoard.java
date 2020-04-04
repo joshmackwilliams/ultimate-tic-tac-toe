@@ -44,7 +44,7 @@ class TestBoard {
 	}
 
 	// Test that a basic move succeeds and leaves a corresponding piece
-	@Test void testFirstMoveSucceeds() {
+	@Test void testFirstMoveSucceeds() throws InvalidMoveException, MultipleMovesException {
 		assertFalse(board.isOccupied(0, 0));
 		board.move(p1.getPiece(), 0, 0);
 		assertTrue(board.isOccupied(0, 0));
@@ -52,7 +52,7 @@ class TestBoard {
 	}
 
 	// Check that you can't move to an occupied space
-	@Test void testCheckOccupiedSpaceMove() {
+	@Test void testCheckOccupiedSpaceMove() throws InvalidMoveException, MultipleMovesException {
 		assertTrue(board.isValidMove(0, 0));
 		board.move(p1.getPiece(), 0, 0);
 		assertFalse(board.isValidMove(0, 0));
@@ -62,7 +62,7 @@ class TestBoard {
 	}
 
 	// Check that the winner detection won't trigger after a single move
-	@Test void testNoWinnerAfterOneMove() {
+	@Test void testNoWinnerAfterOneMove() throws InvalidMoveException, MultipleMovesException {
 		board.move(p1.getPiece(), 0, 0);
 		assertNull(board.getWinner());
 		assertNull(board.getWinner(0));
@@ -71,7 +71,7 @@ class TestBoard {
 	}
 	
 	// Test that a player can win a single board without winning the whole game
-	@Test void testPlayerWinsBoard0() {
+	@Test void testPlayerWinsBoard0() throws InvalidMoveException, MultipleMovesException {
 		BoardTester.test(board, p1, 0, SmallBoard.winConditions[0]);
 		assertFalse(board.hasWinner());
 		assertTrue(board.hasWinner(0));
@@ -81,7 +81,7 @@ class TestBoard {
 		for(int i = 1; i < 9; i++) {assertNull(board.getWinner(i));}
 	}
 	
-	@Test void testOneBoardFull() {
+	@Test void testOneBoardFull() throws InvalidMoveException, MultipleMovesException {
 		for(int i = 0; i < 9; i++) {
 			board.move(p1.getPiece(), 0, i);
 		}
@@ -90,7 +90,7 @@ class TestBoard {
 		for(int i = 1; i < 9; i++) {assertFalse(board.isFull(i));}
 	}
 	
-	@Test void testFull() {
+	@Test void testFull() throws InvalidMoveException, MultipleMovesException {
 		assertFalse(board.isFull());
 		for(int i = 0; i < 9; i++) {
 			for(int j = 0; j < 9; j++) {
@@ -100,7 +100,7 @@ class TestBoard {
 		assertTrue(board.isFull());
 	}
 	
-	@Test void testPlayerWins() {
+	@Test void testPlayerWins() throws InvalidMoveException, MultipleMovesException {
 		BoardTester.test(board, p1, 0, SmallBoard.winConditions[0]);
 		BoardTester.test(board, p1, 4, SmallBoard.winConditions[1]);
 		BoardTester.test(board, p1, 8, SmallBoard.winConditions[2]);

@@ -8,4 +8,16 @@ package com.joshuawilliams.ultimatettt;
 // TODO Add test cases and implement
 public class TerminalDisplay extends Display {
 
+	@Override public void getUserMove(Move move) {
+		
+	}
+
+	@Override public void displayMove(Move move) {
+		
+	}
+
+	@Override public void displayBoard(Board board) {
+		
+	}
+
 }

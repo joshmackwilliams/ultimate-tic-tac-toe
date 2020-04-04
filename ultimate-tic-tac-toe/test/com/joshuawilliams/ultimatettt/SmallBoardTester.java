@@ -7,13 +7,13 @@ package com.joshuawilliams.ultimatettt;
  */
 
 public class SmallBoardTester {
-	public static void test(SmallBoard board, Player player, int[] spaces) {
+	public static void test(SmallBoard board, Player player, int[] spaces) throws InvalidMoveException, MultipleMovesException {
 		for(int i = 0; i < spaces.length; i++) {
 			board.move(player.getPiece(), spaces[i]);
 		}
 	}
 	
-	public static void test(SmallBoard board, Player[] players, int[] spaces) {
+	public static void test(SmallBoard board, Player[] players, int[] spaces) throws InvalidMoveException, MultipleMovesException {
 		for(int i = 0; i < spaces.length; i++) {
 			board.move(players[i].getPiece(), spaces[i]);
 		}

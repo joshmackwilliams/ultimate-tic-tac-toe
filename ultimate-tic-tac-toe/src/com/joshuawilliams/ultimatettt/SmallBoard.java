@@ -80,7 +80,7 @@ public class SmallBoard {
 	}
 	
 	// Called by Move when a player makes a move
-	public void move(Piece piece, int space) {
+	public void move(Piece piece, int space) throws InvalidMoveException {
 		if(! isValidMove(space)) throw new InvalidMoveException();
 		pieces[space] = piece;
 		

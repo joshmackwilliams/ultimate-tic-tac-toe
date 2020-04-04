@@ -90,7 +90,7 @@ public class Board {
 
 	// Attempt to make a move. Throws InvalidMoveException if the move cannot be made. 
 	// Also recalculates the winner after making the move
-	public void move(Piece piece, int board, int space) {
+	public void move(Piece piece, int board, int space) throws InvalidMoveException {
 		if(! isValidMove(board, space)) throw new InvalidMoveException();
 		boards[board].move(piece, space);
 		if(! hasWinner()) winner = calculateWinner();
