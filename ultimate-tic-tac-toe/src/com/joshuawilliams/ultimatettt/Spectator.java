@@ -16,5 +16,6 @@ public abstract class Spectator {
 	// reading state, including what move was made, but not 
 	// modifying it
 	public abstract void moveMade(Move move);
+	public abstract void gameOver(Board board);
 	
 }

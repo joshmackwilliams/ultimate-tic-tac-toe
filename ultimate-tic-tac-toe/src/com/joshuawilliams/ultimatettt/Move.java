@@ -6,7 +6,7 @@ package com.joshuawilliams.ultimatettt;
  * players from making multiple/invalid moves. 
  */
 
-public class Move {
+public class Move implements BoardState{
 	
 	private Player activePlayer;
 	private Board board;
@@ -76,6 +76,14 @@ public class Move {
 	}
 	
 	// The rest of the methods in this class are simply passthroughs to the board
+	public boolean hasWinner() {
+		return this.board.hasWinner();
+	}
+	
+	public Piece getWinner() {
+		return this.board.getWinner();
+	}
+	
 	public boolean hasWinner(int board) {
 		return this.board.hasWinner(board);
 	}

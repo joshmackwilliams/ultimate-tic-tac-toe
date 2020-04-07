@@ -8,8 +8,18 @@ package com.joshuawilliams.ultimatettt;
 
 //TODO Add test cases and implement
 public class DisplaySpectator extends Spectator {
+	
+	private Display display;
+	
+	public DisplaySpectator(Display display) {
+		this.display = display;
+	}
 
 	@Override public void moveMade(Move move) {
+		display.displayMove(move);
+	}
+
+	@Override public void gameOver(Board board) {
 		
 	}
 }

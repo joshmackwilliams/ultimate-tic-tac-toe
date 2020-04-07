@@ -14,7 +14,7 @@ package com.joshuawilliams.ultimatettt;
  * this class as well. 
  */
 
-public class Board {
+public class Board implements BoardState {
 	// winConditions is here as well as SmallBoard to reduce dependency between the classes
 	public static int[][] winConditions = {
 			{0, 1, 2}, {3, 4, 5}, {6, 7, 8},

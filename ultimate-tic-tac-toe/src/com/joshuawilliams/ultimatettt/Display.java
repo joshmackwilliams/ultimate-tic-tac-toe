@@ -8,5 +8,5 @@ package com.joshuawilliams.ultimatettt;
 public abstract class Display {
 	public abstract void getUserMove(Move move); // Get a move from a user 
 	public abstract void displayMove(Move move); // Display a completed move
-	public abstract void displayBoard(Board board); // Display a board state
+	public abstract void displayBoard(BoardState board); // Display a board state
 }

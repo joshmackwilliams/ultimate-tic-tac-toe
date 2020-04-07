@@ -16,7 +16,7 @@ public class TerminalDisplay extends Display {
 		
 	}
 
-	@Override public void displayBoard(Board board) {
+	@Override public void displayBoard(BoardState board) {
 		
 	}
 
