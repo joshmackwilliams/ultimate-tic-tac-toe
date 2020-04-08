@@ -8,10 +8,9 @@ package com.joshuawilliams.ultimatettt;
 public class Main {
 
 	public static void main(String[] args) {
-		Player player1 = new TerminalPlayer("X");
-		Player player2 = new TerminalPlayer("O");
+		Player player1 = new RandomPlayer("X");
+		Player player2 = new RandomPlayer("O");
 		Game game = new Game(player1, player2, new DisplaySpectator());
 		game.play();
 	}
-
 }

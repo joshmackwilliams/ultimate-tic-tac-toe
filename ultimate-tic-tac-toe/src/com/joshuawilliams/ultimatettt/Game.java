@@ -13,6 +13,7 @@ public class Game {
 	private Player player2;
 	private Spectator spectator;
 	private boolean isPlayer1Turn = true;
+	private Move lastMove;
 
 	public Game(Player player1, Player player2) {
 		this(player1, player2, null);
@@ -34,7 +35,8 @@ public class Game {
 	
 	public Move playTurn() {
 		Player activePlayer = isPlayer1Turn ? player1 : player2;
-		Move move = new Move(board, activePlayer);
+		Move move = new Move(board, activePlayer, lastMove);
+		lastMove = move;
 		int invalidMoves = 0;
 		boolean succeeded = false;
 		while(! succeeded) {

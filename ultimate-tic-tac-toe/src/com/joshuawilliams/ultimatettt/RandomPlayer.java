@@ -32,6 +32,8 @@ public class RandomPlayer extends Player {
 		}
 		
 		int moveIndex = random.nextInt(n_moves);
+		System.out.println("RandomPlayer " + identifier + " moves to " + 
+				boards[moveIndex] + ", " + spaces[moveIndex]);
 		move.makeMove(boards[moveIndex], spaces[moveIndex]);
 	}
 }
