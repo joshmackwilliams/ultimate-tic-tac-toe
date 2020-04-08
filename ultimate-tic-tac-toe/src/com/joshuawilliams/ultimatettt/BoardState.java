@@ -6,4 +6,5 @@ public interface BoardState {
 	public Piece getWinner(int board);
 	public boolean hasWinner();
 	public Piece getWinner();
+	public boolean isOccupied(int board, int space);
 }

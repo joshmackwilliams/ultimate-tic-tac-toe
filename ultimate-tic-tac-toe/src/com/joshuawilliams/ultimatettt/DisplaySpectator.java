@@ -6,20 +6,19 @@ package com.joshuawilliams.ultimatettt;
  * players. 
  */
 
-//TODO Add test cases and implement
 public class DisplaySpectator extends Spectator {
-	
-	private Display display;
-	
-	public DisplaySpectator(Display display) {
-		this.display = display;
-	}
 
 	@Override public void moveMade(Move move) {
-		display.displayMove(move);
+		System.out.print(TerminalDisplay.displayBoard(move));
 	}
 
 	@Override public void gameOver(Board board) {
-		
+		if(board.hasWinner()) {
+			System.out.print("Player ");
+			System.out.print(board.getWinner().getIdentifier());
+			System.out.println(" wins!");
+		} else {
+			System.out.println("The game has ended in a tie");
+		}
 	}
 }

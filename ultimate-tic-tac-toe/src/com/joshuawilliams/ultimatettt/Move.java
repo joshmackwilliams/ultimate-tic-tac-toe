@@ -27,6 +27,11 @@ public class Move implements BoardState{
 		this.lastMove = lastMove;
 	}
 	
+	// Get the identifier of the active player
+	public String getActiveIdentifier() {
+		return activePlayer.getIdentifier();
+	}
+	
 	// Make a move, but not if this object has already been used to make a move
 	public void makeMove(int board, int space) throws MultipleMovesException, InvalidMoveException {
 		// Don't let the player make multiple moves

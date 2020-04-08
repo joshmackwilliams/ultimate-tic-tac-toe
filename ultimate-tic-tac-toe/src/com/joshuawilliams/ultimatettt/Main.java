@@ -5,11 +5,13 @@ package com.joshuawilliams.ultimatettt;
  * an initialization in here once the project is finished. 
  */
 
-// TODO Implement once all dependencies are ready
 public class Main {
 
 	public static void main(String[] args) {
-		
+		Player player1 = new TerminalPlayer("X");
+		Player player2 = new TerminalPlayer("O");
+		Game game = new Game(player1, player2, new DisplaySpectator());
+		game.play();
 	}
 
 }
