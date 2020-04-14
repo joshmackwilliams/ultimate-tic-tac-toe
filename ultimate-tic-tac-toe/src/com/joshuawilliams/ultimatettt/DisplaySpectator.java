@@ -13,6 +13,8 @@ public class DisplaySpectator extends Spectator {
 	}
 
 	@Override public void moveMade(Move move) {
+		System.out.println(String.format("Player %s moves to %d, %d", 
+				move.getActiveIdentifier(), move.getBoard(), move.getSpace()));
 		System.out.print(TerminalDisplay.displayBoard(move));
 	}
 
