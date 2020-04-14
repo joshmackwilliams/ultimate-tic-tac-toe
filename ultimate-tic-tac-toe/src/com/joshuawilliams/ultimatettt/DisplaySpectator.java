@@ -7,12 +7,16 @@ package com.joshuawilliams.ultimatettt;
  */
 
 public class DisplaySpectator extends Spectator {
+	
+	@Override public void gameStarted(BoardState board) {
+		System.out.print(TerminalDisplay.displayBoard(board));
+	}
 
 	@Override public void moveMade(Move move) {
 		System.out.print(TerminalDisplay.displayBoard(move));
 	}
 
-	@Override public void gameOver(Board board) {
+	@Override public void gameOver(BoardState board) {
 		if(board.hasWinner()) {
 			System.out.print("Player ");
 			System.out.print(board.getWinner().getIdentifier());

@@ -26,6 +26,8 @@ public class Game {
 	}
 	
 	public void play() {
+		spectator.gameStarted(board);
+		
 		while(!(board.hasWinner() || board.isFull())) {
 			playTurn();
 		}

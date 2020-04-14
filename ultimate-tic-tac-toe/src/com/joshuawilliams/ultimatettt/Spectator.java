@@ -15,7 +15,7 @@ public abstract class Spectator {
 	// Called by Game each time a move is made. Move will allow 
 	// reading state, including what move was made, but not 
 	// modifying it
+	public abstract void gameStarted(BoardState board);
 	public abstract void moveMade(Move move);
-	public abstract void gameOver(Board board);
-	
+	public abstract void gameOver(BoardState board);
 }
