@@ -30,7 +30,7 @@ public class TerminalPlayer extends Player {
 	}
 	
 	private void makeRestrictedMove(Move move) throws MultipleMovesException {
-		System.out.println("Enter the number of the space you want to move to: ");
+		System.out.print("Enter the number of the space you want to move to: ");
 		try {
 			move.makeMove(move.getRequiredBoard(), scanner.nextInt());
 		} catch(InvalidMoveException e) {

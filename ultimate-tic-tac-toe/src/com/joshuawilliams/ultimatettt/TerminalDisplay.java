@@ -22,9 +22,24 @@ public class TerminalDisplay {
 				int board = ((row / 3) * 3) + (col / 3);
 				int space = ((row % 3) * 3) + (col % 3);
 				if(state.isOccupied(board, space)) {
-					builder.append(' ');
-					builder.append(state.getPiece(board, space).getIdentifier());
-					builder.append(' ');
+					boolean winningSpace = false;
+					if(state.hasWinner(board)) {
+						for(int i = 0; i < state.getWinningCondition(board).length; i++) {
+							if(state.getWinningCondition(board)[i] == space) {
+								winningSpace = true;
+								break;
+							}
+						}
+					}
+					if(winningSpace) {
+						builder.append('[');
+						builder.append(state.getPiece(board, space).getIdentifier());
+						builder.append(']');
+					} else {
+						builder.append(' ');
+						builder.append(state.getPiece(board, space).getIdentifier());
+						builder.append(' ');
+					}
 				} else {
 					builder.append("   ");
 				}

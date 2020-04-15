@@ -108,4 +108,8 @@ public class Move implements BoardState{
 	public boolean isOccupied(int board, int space) {
 		return this.board.isOccupied(board, space);
 	}
+
+	@Override public int[] getWinningCondition(int board) {
+		return this.board.getWinningCondition(board);
+	}
 }

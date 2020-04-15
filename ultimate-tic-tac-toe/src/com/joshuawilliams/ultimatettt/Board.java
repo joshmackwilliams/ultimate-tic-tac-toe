@@ -122,4 +122,8 @@ public class Board implements BoardState {
 		// If no condition was satisfied, there's no winner
 		return null;
 	}
+
+	@Override public int[] getWinningCondition(int board) {
+		return boards[board].getWinningCondition();
+	}
 }

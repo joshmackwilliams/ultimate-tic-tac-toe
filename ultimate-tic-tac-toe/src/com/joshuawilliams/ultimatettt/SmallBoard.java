@@ -47,6 +47,9 @@ public class SmallBoard {
 	// are logically equivalent. 
 	private Piece winner = null;
 	
+	// What condition this board was won by
+	private int[] winningCondition;
+	
 	// Empty default constructor is the only constructor here
 	public SmallBoard() {
 		
@@ -126,8 +129,15 @@ public class SmallBoard {
 					break;
 				}
 			}
-			if(winner) return checking;
+			if(winner) {
+				winningCondition = condition;
+				return checking;
+			}
 		}
 		return null;
+	}
+
+	public int[] getWinningCondition() {
+		return winningCondition;
 	}
 }
