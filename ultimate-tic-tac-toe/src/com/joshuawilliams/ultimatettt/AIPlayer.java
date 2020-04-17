@@ -66,13 +66,15 @@ public class AIPlayer extends Player {
 		move.makeMove(boards[bestMove], spaces[bestMove]);
 	}
 	
-	private int scoreMove(int board, int space, Move move, int tries) {
+	private int scoreMove(int board, int space, Move move, int tries) throws InvalidMoveException, MultipleMovesException {
 		Player me = new RandomPlayer(move.getActiveIdentifier());
 		Player them = new RandomPlayer(move.getOtherIdentifier());
 		int score = 0;
 		for(int i = 0; i < tries; i++) {
 			Game testGame = new Game(them, me, move.getBoardClone());
-			testGame.setLastMove(move.getLastMove());
+			Move myMove = new Move(testGame.getBoard(), me, them);
+			myMove.makeMove(board, space);
+			testGame.setLastMove(myMove);
 			testGame.play();
 			if(testGame.getBoard().hasWinner()) {
 				if(testGame.getBoard().getWinner().belongsTo(me)) {
