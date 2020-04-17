@@ -36,6 +36,10 @@ public class Board implements BoardState {
 			boards[i] = new SmallBoard();
 		}
 	}
+	
+	private Board(SmallBoard[] boards) {
+		this.boards = boards;
+	}
 
 	public int getWidth() {
 		return width;
@@ -125,5 +129,17 @@ public class Board implements BoardState {
 
 	@Override public int[] getWinningCondition(int board) {
 		return boards[board].getWinningCondition();
+	}
+	
+	@Override public Board clone() {
+		SmallBoard[] newBoards = new SmallBoard[9];
+		for(int i = 0; i < 9; i++) {
+			newBoards[i] = boards[i].clone();
+		}
+		Board newBoard = new Board(newBoards);
+		newBoard.width = width;
+		newBoard.height = height;
+		newBoard.winner = winner;
+		return newBoard;
 	}
 }

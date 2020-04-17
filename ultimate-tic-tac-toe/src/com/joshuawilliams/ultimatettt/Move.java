@@ -6,9 +6,10 @@ package com.joshuawilliams.ultimatettt;
  * players from making multiple/invalid moves. 
  */
 
-public class Move implements BoardState{
+public class Move implements BoardState {
 	
 	private Player activePlayer;
+	private Player otherPlayer;
 	private Board board;
 	private Move lastMove;
 	
@@ -17,19 +18,25 @@ public class Move implements BoardState{
 	private int moveBoard;
 	private int moveSpace;
 	
-	public Move(Board board, Player activePlayer) {
+	public Move(Board board, Player activePlayer, Player otherPlayer) {
 		this.board = board;
 		this.activePlayer = activePlayer;
+		this.otherPlayer = otherPlayer;
 	}
 	
-	public Move(Board board, Player activePlayer, Move lastMove) {
-		this(board, activePlayer);
+	public Move(Board board, Player activePlayer, Player otherPlayer, Move lastMove) {
+		this(board, activePlayer, otherPlayer);
 		this.lastMove = lastMove;
 	}
 	
 	// Get the identifier of the active player
 	public String getActiveIdentifier() {
 		return activePlayer.getIdentifier();
+	}
+	
+	// Get the other player's identifier
+	public String getOtherIdentifier() {
+		return otherPlayer.getIdentifier();
 	}
 	
 	// Make a move, but not if this object has already been used to make a move

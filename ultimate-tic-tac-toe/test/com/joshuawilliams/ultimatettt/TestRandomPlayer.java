@@ -11,6 +11,7 @@ class TestRandomPlayer {
 	
 	Board board;
 	Player player;
+	Player player2 = new TestingPlayer("Player2");
 	Random random = new Random();
 
 	@BeforeEach void setUp() {
@@ -20,7 +21,7 @@ class TestRandomPlayer {
 	
 	// This test makes sure that the random player will actually make a move on an empty board
 	@Test void testMakesMove() throws InvalidMoveException, MultipleMovesException {
-		player.makeMove(new Move(board, player));
+		player.makeMove(new Move(board, player, player2));
 		boolean madeMove = false;
 		for(int iboard = 0; iboard < 9; iboard++) {
 			for(int ispace = 0; ispace < 9; ispace++) {
@@ -48,7 +49,7 @@ class TestRandomPlayer {
 				}
 			}
 			
-			player.makeMove(new Move(board, player));
+			player.makeMove(new Move(board, player, player2));
 			assertEquals(player.getPiece(), board.getPiece(validMoveBoard, validMoveSpace));
 		}
 	}

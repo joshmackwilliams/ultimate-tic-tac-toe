@@ -8,7 +8,7 @@ package com.joshuawilliams.ultimatettt;
 // TODO Add test cases
 public class Game {
 	
-	private Board board = new Board();
+	private Board board;
 	private Player player1;
 	private Player player2;
 	private Spectator spectator;
@@ -16,13 +16,18 @@ public class Game {
 	private Move lastMove;
 
 	public Game(Player player1, Player player2) {
-		this(player1, player2, null);
+		this(player1, player2, null, new Board());
 	}
 	
 	public Game(Player player1, Player player2, Spectator spectator) {
+		this(player1, player2, spectator, new Board());
+	}
+	
+	public Game(Player player1, Player player2, Spectator spectator, Board board) {
 		this.player1 = player1;
 		this.player2 = player2;
 		this.spectator = spectator;
+		this.board = new Board();
 	}
 	
 	public void play() {
@@ -36,8 +41,16 @@ public class Game {
 	}
 	
 	public Move playTurn() {
-		Player activePlayer = isPlayer1Turn ? player1 : player2;
-		Move move = new Move(board, activePlayer, lastMove);
+		Player activePlayer;
+		Player otherPlayer;
+		if(isPlayer1Turn) {
+			activePlayer = player1;
+			otherPlayer = player2;
+		} else {
+			activePlayer = player2;
+			otherPlayer = player1;
+		}
+		Move move = new Move(board, activePlayer, otherPlayer, lastMove);
 		lastMove = move;
 		int invalidMoves = 0;
 		boolean succeeded = false;

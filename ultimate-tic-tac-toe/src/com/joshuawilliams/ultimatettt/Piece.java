@@ -7,9 +7,9 @@ package com.joshuawilliams.ultimatettt;
  * to by checking for equality
  */
 
-public class Piece {
+public final class Piece { // Do not extend, especially to make it non-read-only as this will mess with SmallBoard.clone()
 	
-	private Player owner;
+	private final Player owner;
 	
 	public Piece(Player owner) {
 		this.owner = owner;

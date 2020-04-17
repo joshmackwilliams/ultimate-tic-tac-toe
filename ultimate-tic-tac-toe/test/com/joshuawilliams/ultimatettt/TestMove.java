@@ -9,12 +9,14 @@ class TestMove {
 	
 	Board board;
 	Player player;
+	Player player2;
 	Move move;
 
 	@BeforeEach void setUp() throws Exception {
 		board = new Board();
 		player = new TestingPlayer("Player");
-		move = new Move(board, player);
+		player2 = new TestingPlayer("Player2");
+		move = new Move(board, player, player2);
 	}
 
 	@Test void testOneMoveSucceeds() throws InvalidMoveException, MultipleMovesException {
@@ -37,7 +39,7 @@ class TestMove {
 	
 	@Test void testRequiredBoardEnforced() throws InvalidMoveException, MultipleMovesException {
 		move.makeMove(1, 2);
-		move = new Move(board, player, move);
+		move = new Move(board, player, player2, move);
 		assertFalse(move.isValidMove(3, 4));
 		assertThrows(InvalidMoveException.class, () -> {
 			move.makeMove(3, 4);

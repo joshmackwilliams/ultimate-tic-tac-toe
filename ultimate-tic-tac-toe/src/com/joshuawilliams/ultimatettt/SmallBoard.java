@@ -30,7 +30,7 @@ package com.joshuawilliams.ultimatettt;
 
 public class SmallBoard {
 	// All combinations of spaces that can result in a win
-	public static int[][] winConditions = {
+	public static final int[][] winConditions = {
 		{0, 1, 2}, {3, 4, 5}, {6, 7, 8},
 		{0, 3, 6}, {1, 4, 7}, {2, 5, 8}, 
 		{0, 4, 8}, {2, 4, 6}
@@ -53,6 +53,10 @@ public class SmallBoard {
 	// Empty default constructor is the only constructor here
 	public SmallBoard() {
 		
+	}
+	
+	private SmallBoard(Piece[] pieces) {
+		this.pieces = pieces;
 	}
 	
 	public int getHeight() {
@@ -139,5 +143,18 @@ public class SmallBoard {
 
 	public int[] getWinningCondition() {
 		return winningCondition;
+	}
+	
+	@Override public SmallBoard clone() {
+		Piece[] newPieces = new Piece[width * height];
+		for(int i = 0; i < width * height; i++) {
+			newPieces[i] = pieces[i]; // Piece is read-only, so we can duplicate references
+		}
+		SmallBoard newBoard = new SmallBoard(newPieces);
+		newBoard.width = width;
+		newBoard.height = height;
+		newBoard.winner = winner;
+		newBoard.winningCondition = winningCondition;
+		return newBoard;
 	}
 }
