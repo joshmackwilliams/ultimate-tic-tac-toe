@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Main {
 	
 	private static Scanner scanner = new Scanner(System.in);
-	private static final int nPlayerTypes = 2;
+	private static final int nPlayerTypes = 3;
 
 	public static void main(String[] args) {
 		Player player1 = selectPlayer("X");
@@ -37,7 +37,8 @@ public class Main {
 			if(error) {
 				System.out.print("Please choose from the following options: \n"
 						+ "1. Human-Controlled Player\n"
-						+ "2. Random-Controlled Player\n\n"
+						+ "2. Random-Controlled Player\n"
+						+ "3. AI-Controlled Player\n\n"
 						+ "Select an option: ");
 			}
 		}
@@ -46,6 +47,8 @@ public class Main {
 			return new TerminalPlayer(token);
 		case 2:
 			return new RandomPlayer(token);
+		case 3:
+			return new AIPlayer(token);
 		}
 		return null; // This should never happen, but it makes the compiler happy
 	}

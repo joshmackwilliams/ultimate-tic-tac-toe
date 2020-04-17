@@ -23,15 +23,19 @@ public class Game {
 		this(player1, player2, spectator, new Board());
 	}
 	
+	public Game(Player player1, Player player2, Board board) {
+		this(player1, player2, null, board);
+	}
+	
 	public Game(Player player1, Player player2, Spectator spectator, Board board) {
 		this.player1 = player1;
 		this.player2 = player2;
 		this.spectator = spectator;
-		this.board = new Board();
+		this.board = board;
 	}
 	
 	public void play() {
-		spectator.gameStarted(board);
+		if(spectator != null) spectator.gameStarted(board);
 		
 		while(!(board.hasWinner() || board.isFull())) {
 			playTurn();
@@ -83,5 +87,9 @@ public class Game {
 	
 	public Board getBoard() {
 		return board;
+	}
+	
+	public void setLastMove(Move move) {
+		lastMove = move;
 	}
 }

@@ -14,9 +14,9 @@ public class Move implements BoardState {
 	private Move lastMove;
 	
 	// These will be set when a move is made
-	private boolean isMade = false;
-	private int moveBoard;
-	private int moveSpace;
+	protected boolean isMade = false;
+	protected int moveBoard;
+	protected int moveSpace;
 	
 	public Move(Board board, Player activePlayer, Player otherPlayer) {
 		this.board = board;
@@ -118,5 +118,13 @@ public class Move implements BoardState {
 
 	@Override public int[] getWinningCondition(int board) {
 		return this.board.getWinningCondition(board);
+	}
+	
+	public Board getBoardClone() {
+		return board.clone();
+	}
+	
+	public Move getLastMove() {
+		return lastMove;
 	}
 }
