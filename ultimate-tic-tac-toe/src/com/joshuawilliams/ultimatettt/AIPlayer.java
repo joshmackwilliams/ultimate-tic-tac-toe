@@ -11,6 +11,10 @@ public class AIPlayer extends Player {
 	private int intelligence = 10000;
 	private boolean verbose = false;
 	
+	public AIPlayer(String identifier) {
+		super(identifier);
+	}
+	
 	public AIPlayer(String identifier, boolean verbose) {
 		super(identifier);
 		this.verbose = verbose;
