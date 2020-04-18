@@ -48,7 +48,7 @@ public class Main {
 		case 2:
 			return new RandomPlayer(token);
 		case 3:
-			return new AIPlayer(token);
+			return new AIPlayer(token, true);
 		}
 		return null; // This should never happen, but it makes the compiler happy
 	}

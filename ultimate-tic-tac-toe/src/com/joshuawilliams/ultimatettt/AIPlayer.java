@@ -8,10 +8,12 @@ package com.joshuawilliams.ultimatettt;
 
 public class AIPlayer extends Player {
 	
-	private int intelligence = 500000;
+	private int intelligence = 10000;
+	private boolean verbose = false;
 	
-	public AIPlayer(String identifier) {
+	public AIPlayer(String identifier, boolean verbose) {
 		super(identifier);
+		this.verbose = verbose;
 	}
 	
 	public AIPlayer(String identifier, int intelligence) {
@@ -63,6 +65,9 @@ public class AIPlayer extends Player {
 			}
 		}
 		
+		double confidence = (((double)bestScore)/(((double)intelligence)/((double)n_moves))) * 100.0;
+		if(verbose) System.out.println("[" + getIdentifier() + "] Making move with a score of "
+				+ bestScore + " / " + (intelligence/n_moves) + " (" + confidence + "%)");
 		move.makeMove(boards[bestMove], spaces[bestMove]);
 	}
 	
@@ -79,8 +84,10 @@ public class AIPlayer extends Player {
 			if(testGame.getBoard().hasWinner()) {
 				if(testGame.getBoard().getWinner().belongsTo(me)) {
 					score++;
-				} else {
+				} else if(testGame.getBoard().getWinner().belongsTo(them)) {
 					score--;
+				} else {
+					throw new RuntimeException("ERROR");
 				}
 			}
 		}

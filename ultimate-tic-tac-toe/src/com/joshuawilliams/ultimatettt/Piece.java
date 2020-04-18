@@ -17,7 +17,7 @@ public final class Piece { // Do not extend, especially to make it non-read-only
 	
 	@Override public boolean equals(Object other) {
 		if(!(other instanceof Piece)) return false;
-		return this.owner.equals(((Piece) other).owner);
+		return this.owner.getIdentifier().equals(((Piece) other).owner.getIdentifier());
 	}
 	
 	@Override public String toString() {
@@ -29,6 +29,6 @@ public final class Piece { // Do not extend, especially to make it non-read-only
 	}
 	
 	public boolean belongsTo(Player player) {
-		return owner.equals(player);
+		return owner.getIdentifier().equals(player.getIdentifier());
 	}
 }
