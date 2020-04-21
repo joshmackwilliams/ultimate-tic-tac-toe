@@ -4,11 +4,14 @@ package com.joshuawilliams.ultimatettt;
  * As a minmax search would likely be quite expensive and slow, and also require a ranking method 
  * for a game that is difficult to rank, this class uses a Monte Carlo simulation to determine the 
  * best move
+ * 
+ * Note that an improvement might be to use minmax to look a few steps ahead, then just use Monte Carlo 
+ * for state ranking
  */
 
 public class AIPlayer extends Player {
 	
-	private int intelligence = 10000;
+	private int intelligence = 100000;
 	private boolean verbose = false;
 	
 	public AIPlayer(String identifier) {
