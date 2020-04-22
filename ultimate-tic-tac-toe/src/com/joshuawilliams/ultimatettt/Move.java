@@ -130,6 +130,10 @@ public class Move implements BoardState {
 		return this.board.getWinningCondition(board);
 	}
 	
+	@Override public boolean isFull() {
+		return board.isFull();
+	}
+	
 	public Board getBoardClone() {
 		return board.clone();
 	}

@@ -9,4 +9,6 @@ public interface BoardState {
 	public Piece getWinner();
 	public boolean isOccupied(int board, int space);
 	public int[] getWinningCondition(int board);
+	public boolean isFull();
+	public boolean isFull(int board);
 }

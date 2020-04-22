@@ -35,7 +35,7 @@ public class AIPlayer extends Player {
 	}
 
 	@Override public void makeMove(Move move) throws MultipleMovesException, InvalidMoveException {
-		// Allocate space for up to 81 moves, the maximum possilbe number
+		// Allocate space for up to 81 moves, the maximum possible number
 		int[] boards = new int[81];
 		int[] spaces = new int[81];
 		int n_moves = 0; // Number of valid moves actually found
