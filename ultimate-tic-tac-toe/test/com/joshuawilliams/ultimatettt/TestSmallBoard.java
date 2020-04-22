@@ -85,7 +85,7 @@ class TestSmallBoard {
 	
 	// Test that a player can win
 	@Test void testPlayerWins() throws InvalidMoveException, MultipleMovesException {
-		SmallBoardTester.test(board, p1, SmallBoard.winConditions[0]);
+		SmallBoardTester.test(board, p1, SmallBoard.WIN_CONDITIONS[0]);
 		assertEquals(p1.getPiece(), board.getWinner());
 		assertTrue(board.hasWinner());
 	}

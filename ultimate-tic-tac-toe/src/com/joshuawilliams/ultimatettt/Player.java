@@ -9,7 +9,7 @@ package com.joshuawilliams.ultimatettt;
  */
 
 public abstract class Player {
-	protected String identifier;
+	protected String identifier; // A String, such as "X" or "O", that identifies this player
 	
 	public abstract void makeMove(Move move) throws InvalidMoveException, MultipleMovesException;
 	
@@ -21,11 +21,13 @@ public abstract class Player {
 		return identifier;
 	}
 	
+	// Get a piece belonging to this player
 	public final Piece getPiece() {
 		return new Piece(this);
 	}
 	
-	@Override public String toString() {
+	// Show the identifier when converting to string to make it easier to differentiate between players in debug
+	@Override public final String toString() {
 		return getClass().getName() + "(" + getIdentifier() + ")@" + Integer.toHexString(hashCode()); 
 	}
 }

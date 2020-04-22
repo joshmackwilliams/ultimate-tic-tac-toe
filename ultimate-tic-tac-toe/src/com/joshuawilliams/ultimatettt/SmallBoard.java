@@ -30,35 +30,43 @@ package com.joshuawilliams.ultimatettt;
 
 public class SmallBoard {
 	// All combinations of spaces that can result in a win
-	public static final int[][] winConditions = {
+	// This is duplicated between SmallBoard and Board because there's really no reason that they have 
+	// to be the same, they just happen to be for this game
+	public static final int[][] WIN_CONDITIONS = { 
 		{0, 1, 2}, {3, 4, 5}, {6, 7, 8},
 		{0, 3, 6}, {1, 4, 7}, {2, 5, 8}, 
 		{0, 4, 8}, {2, 4, 6}
 	};
 	
-	// These are read-only, since there's no meaningful way to change them later on
-	private int height = 3;
-	private int width = 3;
+	// These are read-only because they can't meaningfully be modified later on
+	private final int height;
+	private final int width;
 	
 	// Space to store pieces as we receive them. See above for the coordinate system. 
-	private Piece[] pieces = new Piece[height * width];
+	private Piece[] pieces;
 	
-	// Tracks any piece of the player who won first (all pieces of the same player 
-	// are logically equivalent. 
+	// Tracks any piece of the player who won first (all pieces with the same identifier 
+	// are logically equivalent.)
 	private Piece winner = null;
 	
-	// What condition this board was won by
+	// What condition this board was won by. Used to highlight winning spaces in display
 	private int[] winningCondition;
 	
-	// Empty default constructor is the only constructor here
+	// Empty default constructor to initialize empty board
 	public SmallBoard() {
-		
+		height = 3;
+		width = 3;
+		pieces = new Piece[height * width];
 	}
 	
-	private SmallBoard(Piece[] pieces) {
+	// Private constructor used when cloning the board
+	private SmallBoard(int height, int width, Piece[] pieces) {
+		this.height = height;
+		this.width = width;
 		this.pieces = pieces;
 	}
 	
+	// Standard getters
 	public int getHeight() {
 		return height;
 	}
@@ -67,6 +75,7 @@ public class SmallBoard {
 		return width;
 	}
 	
+	// Get the piece at a given space, indexed 0 to 8
 	public Piece getPiece(int space) {
 		return pieces[space];
 	}
@@ -91,15 +100,20 @@ public class SmallBoard {
 		if(! isValidMove(space)) throw new InvalidMoveException();
 		pieces[space] = piece;
 		
-		// Note that winner is recalculated each move, only if there is no current 
+		// Note that winner is recalculated each move, but only if there is no current 
 		// winner. This is because once a player wins a board, they have won it forever. 
+		// This is the only place that winner is set
 		if(! hasWinner()) winner = calculateWinner();
 	}
 	
+	// True if this board has a winner
 	public boolean hasWinner() {
 		return getWinner() != null;
 	}
 	
+	// Get a piece belonging to the winner of this board. Note that in order to create safer 
+	// code, the SmallBoard class is unable to access data about the Players playing on it. 
+	// Instead, they are limited to interacting with the much simpler Pieces. 
 	public Piece getWinner() {
 		return winner;
 	}
@@ -121,7 +135,7 @@ public class SmallBoard {
 	// return whoever matched the earlier condition in the winConditions array. 
 	private Piece calculateWinner() {
 		// Check all conditions
-		for(int[] condition : winConditions) {
+		for(int[] condition : WIN_CONDITIONS) {
 			// If there's no piece at the first index given by the condition, move on
 			Piece checking = pieces[condition[0]];
 			if(checking == null) continue;
@@ -141,19 +155,27 @@ public class SmallBoard {
 		return null;
 	}
 
+	// Return the condition that won this board
 	public int[] getWinningCondition() {
 		return winningCondition;
 	}
 	
+	// Returns a deep clone of this board. Used by AIPlayer when running simulations. 
 	@Override public SmallBoard clone() {
 		Piece[] newPieces = new Piece[width * height];
 		for(int i = 0; i < width * height; i++) {
-			newPieces[i] = pieces[i]; // Piece is read-only, so we can duplicate references
+			if(pieces[i] == null) {
+				newPieces[i] = null;
+			} else {
+				newPieces[i] = pieces[i].clone();
+			}
 		}
-		SmallBoard newBoard = new SmallBoard(newPieces);
-		newBoard.width = width;
-		newBoard.height = height;
-		newBoard.winner = winner;
+		SmallBoard newBoard = new SmallBoard(height, width, newPieces);
+		if(winner != null) newBoard.winner = winner.clone(); // Make sure that the winner remains the same
+		// Note that cloning the pieces results in the cloned board having a winning piece that is not 
+		// actually on the board. This is not a problem, though, because pieces are read-only and they 
+		// all reference the same player. 
+		
 		newBoard.winningCondition = winningCondition;
 		return newBoard;
 	}

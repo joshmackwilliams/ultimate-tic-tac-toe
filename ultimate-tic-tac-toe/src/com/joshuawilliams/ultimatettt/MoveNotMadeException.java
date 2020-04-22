@@ -1,4 +1,6 @@
 package com.joshuawilliams.ultimatettt;
+ 
+// Thrown when an attempt is made to access data about a Move that has not yet been made
 
 public class MoveNotMadeException extends RuntimeException {
 

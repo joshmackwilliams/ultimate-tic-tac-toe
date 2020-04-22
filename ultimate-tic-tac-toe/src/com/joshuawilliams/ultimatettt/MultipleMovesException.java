@@ -2,7 +2,7 @@ package com.joshuawilliams.ultimatettt;
 
 /*
  * This exception is thrown when a player attempts to make more than one move 
- * using a single Move object. This will probably be caught by the Game and 
+ * using a single Move object. This will usually be caught by the Game and 
  * the extra move will simply be ignored. 
  */
 

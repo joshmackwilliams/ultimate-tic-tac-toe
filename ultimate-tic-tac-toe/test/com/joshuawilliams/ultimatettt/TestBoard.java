@@ -11,12 +11,14 @@ class TestBoard {
 	Player p1;
 	Player p2;
 
+	// Create a new Board and Players to make sure tests don't interfere with each other
 	@BeforeEach void setUp() {
 		board = new Board();
 		p1 = new TestingPlayer("P1");
 		p2 = new TestingPlayer("P2");
 	}
 
+	// Just test that we can successfully initialize a Board
 	@Test void testInitializes() {
 		assertEquals(3, board.getWidth());
 		assertEquals(3, board.getHeight());
@@ -72,7 +74,7 @@ class TestBoard {
 	
 	// Test that a player can win a single board without winning the whole game
 	@Test void testPlayerWinsBoard0() throws InvalidMoveException, MultipleMovesException {
-		BoardTester.test(board, p1, 0, SmallBoard.winConditions[0]);
+		BoardTester.test(board, p1, 0, SmallBoard.WIN_CONDITIONS[0]);
 		assertFalse(board.hasWinner());
 		assertTrue(board.hasWinner(0));
 		for(int i = 1; i < 9; i++) {assertFalse(board.hasWinner(i));}
@@ -81,6 +83,7 @@ class TestBoard {
 		for(int i = 1; i < 9; i++) {assertNull(board.getWinner(i));}
 	}
 	
+	// Make sure that the isFull() methods report correctly when one board is full
 	@Test void testOneBoardFull() throws InvalidMoveException, MultipleMovesException {
 		for(int i = 0; i < 9; i++) {
 			board.move(p1.getPiece(), 0, i);
@@ -90,6 +93,7 @@ class TestBoard {
 		for(int i = 1; i < 9; i++) {assertFalse(board.isFull(i));}
 	}
 	
+	// Test that isFull() reports when the whole board is full
 	@Test void testFull() throws InvalidMoveException, MultipleMovesException {
 		assertFalse(board.isFull());
 		for(int i = 0; i < 9; i++) {
@@ -100,10 +104,11 @@ class TestBoard {
 		assertTrue(board.isFull());
 	}
 	
+	// Test that a player can win the game
 	@Test void testPlayerWins() throws InvalidMoveException, MultipleMovesException {
-		BoardTester.test(board, p1, 0, SmallBoard.winConditions[0]);
-		BoardTester.test(board, p1, 4, SmallBoard.winConditions[1]);
-		BoardTester.test(board, p1, 8, SmallBoard.winConditions[2]);
+		BoardTester.test(board, p1, 0, SmallBoard.WIN_CONDITIONS[0]);
+		BoardTester.test(board, p1, 4, SmallBoard.WIN_CONDITIONS[1]);
+		BoardTester.test(board, p1, 8, SmallBoard.WIN_CONDITIONS[2]);
 		assertTrue(board.hasWinner());
 		assertEquals(p1.getPiece(), board.getWinner());
 	}

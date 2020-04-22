@@ -5,16 +5,17 @@ package com.joshuawilliams.ultimatettt;
  * responsible for controlling most of the other classes in this project. 
  */
 
-// TODO Add test cases
 public class Game {
 	
+	// All state data necessary for the game
 	private Board board;
 	private Player player1;
 	private Player player2;
 	private Spectator spectator;
 	private boolean isPlayer1Turn = true;
 	private Move lastMove;
-
+	
+	// Games can be created with any players, up to one spectator, and potentially a provided board
 	public Game(Player player1, Player player2) {
 		this(player1, player2, null, new Board());
 	}
@@ -23,6 +24,7 @@ public class Game {
 		this(player1, player2, spectator, new Board());
 	}
 	
+	// This is used by AIPlayer when running simulations
 	public Game(Player player1, Player player2, Board board) {
 		this(player1, player2, null, board);
 	}
@@ -34,6 +36,7 @@ public class Game {
 		this.board = board;
 	}
 	
+	// Player the whole game until it is finished
 	public void play() {
 		if(spectator != null) spectator.gameStarted(board);
 		
@@ -44,7 +47,9 @@ public class Game {
 		if(spectator != null) spectator.gameOver(board);
 	}
 	
+	// Play a turn and return the move that was made
 	public Move playTurn() {
+		// Differentiate between players based on whose turn it is
 		Player activePlayer;
 		Player otherPlayer;
 		if(isPlayer1Turn) {
@@ -54,10 +59,14 @@ public class Game {
 			activePlayer = player2;
 			otherPlayer = player1;
 		}
+		
+		// Create a new, unused move
 		Move move = new Move(board, activePlayer, otherPlayer, lastMove);
 		lastMove = move;
 		int invalidMoves = 0;
 		boolean succeeded = false;
+		
+		// Repeatedly try to get the player to make a move and handle various exceptions
 		while(! succeeded) {
 			try {
 				activePlayer.makeMove(move);
@@ -82,6 +91,7 @@ public class Game {
 		// Alert any spectator that a move was made
 		if(spectator != null) spectator.moveMade(move);
 		isPlayer1Turn = ! isPlayer1Turn;
+		
 		return move;
 	}
 	
@@ -89,6 +99,7 @@ public class Game {
 		return board;
 	}
 	
+	// This is only used by AIPlayer to force a move to a particular board in simulations
 	public void setLastMove(Move move) {
 		lastMove = move;
 	}

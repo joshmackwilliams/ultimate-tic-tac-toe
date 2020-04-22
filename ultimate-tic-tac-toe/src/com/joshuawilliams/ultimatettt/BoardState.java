@@ -1,5 +1,6 @@
 package com.joshuawilliams.ultimatettt;
 
+// Interface satisfied by both Board and Move that allows read-only access to the Board's state
 public interface BoardState {
 	public Piece getPiece(int board, int space);
 	public boolean hasWinner(int board);

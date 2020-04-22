@@ -1,5 +1,10 @@
 package com.joshuawilliams.ultimatettt;
 
+/*
+ * This class simulates several games between the AI and a RandomPlayer and computes a score for 
+ * the AI. Useful to make sure that AIPlayer is actually working properly
+ */
+
 public class ScoreAIPlayer {
 	public static void main(String[] args) {
 		Player ai = new AIPlayer("A");
@@ -16,7 +21,7 @@ public class ScoreAIPlayer {
 					score--;
 					System.out.print('R');
 				} else {
-					throw new RuntimeException("Wat");
+					throw new RuntimeException("Error: winning piece does not belong to any player");
 				}
 			} else {
 				System.out.print('T');

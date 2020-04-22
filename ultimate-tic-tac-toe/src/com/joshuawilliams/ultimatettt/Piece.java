@@ -31,4 +31,8 @@ public final class Piece { // Do not extend, especially to make it non-read-only
 	public boolean belongsTo(Player player) {
 		return owner.getIdentifier().equals(player.getIdentifier());
 	}
+	
+	public Piece clone() {
+		return new Piece(owner);
+	}
 }

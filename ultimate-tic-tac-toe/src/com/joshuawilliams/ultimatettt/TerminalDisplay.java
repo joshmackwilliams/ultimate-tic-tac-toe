@@ -1,11 +1,7 @@
 package com.joshuawilliams.ultimatettt;
 
-/* 
- * The TerminalDisplay is a type of Display that converts the board to ASCII and 
- * displays game state through the terminal. 
- */
+// Class to convert BoardStates to ASCII
 
-// TODO Add test cases
 public class TerminalDisplay {
 	
 	private static final String topDivider = "╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗\n";

@@ -19,9 +19,9 @@ public class RandomPlayer extends Player {
 		int[] boards = new int[81];
 		int[] spaces = new int[81];
 		int n_moves = 0;
-		
+
+		// Compile a list of valid moves
 		if(! move.hasRequiredBoard()) {
-			// Compile a list of valid moves
 			for(int board = 0; board < 9; board++) {
 				for(int space = 0; space < 9; space++) {
 					if(move.isValidMove(board, space)) {

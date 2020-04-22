@@ -4,6 +4,8 @@ package com.joshuawilliams.ultimatettt;
  * This class represents a move available to a player and serves to decouple 
  * move-making logic from the inner workings of the board as well as to prevent 
  * players from making multiple/invalid moves. 
+ * 
+ * Basically, this class represents a move, whether it has been made or not
  */
 
 public class Move implements BoardState {
@@ -24,6 +26,7 @@ public class Move implements BoardState {
 		this.otherPlayer = otherPlayer;
 	}
 	
+	// lastMove is important when a player must move on a particular board
 	public Move(Board board, Player activePlayer, Player otherPlayer, Move lastMove) {
 		this(board, activePlayer, otherPlayer);
 		this.lastMove = lastMove;
@@ -81,6 +84,13 @@ public class Move implements BoardState {
 		return moveSpace;
 	}
 	
+	public Move getLastMove() {
+		return lastMove;
+	}
+	
+	// Checks if the given board a space constitute a valid move for the active player to make
+	// This includes checking if a move has already been made, if the proposed space is occupied, 
+	// and whether the given board is allowed this move. 
 	public boolean isValidMove(int board, int space) {
 		if(isMade()) return false;
 		if(hasRequiredBoard() && board != getRequiredBoard()) return false;
@@ -122,9 +132,5 @@ public class Move implements BoardState {
 	
 	public Board getBoardClone() {
 		return board.clone();
-	}
-	
-	public Move getLastMove() {
-		return lastMove;
 	}
 }

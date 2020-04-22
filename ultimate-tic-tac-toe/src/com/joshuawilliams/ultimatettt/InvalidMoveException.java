@@ -5,6 +5,9 @@ package com.joshuawilliams.ultimatettt;
  * be handled differently by various player classes. An AIPlayer might have 
  * a fallback algorithm to use if its original move fails, while a HumanPlayer 
  * could simply require the user to make another choice. 
+ * 
+ * Alternatively, this can be caught by the Game class and used to notify the 
+ * user that something is wrong with the Player code
  */
 
 public class InvalidMoveException extends Exception {

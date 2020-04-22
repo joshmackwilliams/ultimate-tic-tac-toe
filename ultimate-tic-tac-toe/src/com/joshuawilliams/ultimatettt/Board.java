@@ -16,7 +16,7 @@ package com.joshuawilliams.ultimatettt;
 
 public class Board implements BoardState {
 	// winConditions is here as well as SmallBoard to reduce dependency between the classes
-	public static int[][] winConditions = {
+	public static final int[][] WIN_CONDITIONS = {
 			{0, 1, 2}, {3, 4, 5}, {6, 7, 8},
 			{0, 3, 6}, {1, 4, 7}, {2, 5, 8}, 
 			{0, 4, 8}, {2, 4, 6}
@@ -108,7 +108,7 @@ public class Board implements BoardState {
 
 	private Piece calculateWinner() {
 		// Check each condition
-		for(int[] condition : winConditions) {
+		for(int[] condition : WIN_CONDITIONS) {
 			// If there's no winner on the first board we are checking, move on
 			if(! boards[condition[0]].hasWinner()) continue;
 			// Save a piece of the player that may have won this condition

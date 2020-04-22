@@ -14,6 +14,7 @@ public class TerminalPlayer extends Player {
 		super(identifier);
 	}
 
+	// Get a move from the player and make the move
 	@Override public void makeMove(Move move) throws MultipleMovesException {
 		System.out.print("Player ");
 		System.out.print(identifier);
@@ -28,15 +29,16 @@ public class TerminalPlayer extends Player {
 		}
 	}
 	
+	// Make a move that must go on a specific board
 	private void makeRestrictedMove(Move move) throws MultipleMovesException {
 		System.out.print("Enter the number of the space you want to move to: ");
 		String line = scanner.nextLine();
-		if(line.equals("")) {
+		if(line.equals("")) { // Just pressing enter displays a list of valid moves
 			displayRestrictedMoves(move);
 			makeRestrictedMove(move);
 			return;
 		}
-		try {
+		try { // If they entered an invalid move, or didn't enter a number, try again
 			move.makeMove(move.getRequiredBoard(), Integer.parseInt(line));
 		} catch(InvalidMoveException e) {
 			System.out.println("Invalid move! Please try again, or press enter for a list of valid moves. ");
@@ -47,15 +49,16 @@ public class TerminalPlayer extends Player {
 		}
 	}
 	
+	// Make a move that can go to any free space on the board
 	private void makeFreeMove(Move move) throws MultipleMovesException {
 		System.out.print("Enter your move (<board> <space>): ");
 		String line = scanner.nextLine();
-		if(line.equals("")) {
+		if(line.equals("")) { // Just pressing enter displays a list of valid moves
 			displayFreeMoves(move);
 			makeFreeMove(move);
 			return;
 		}
-		try {
+		try { // Catch all manners of invalid input, as well as moves that go against the rules
 			int board = Integer.parseInt(line.substring(0, 1));
 			int space = Integer.parseInt(line.substring(2, 3));
 			move.makeMove(board, space);
@@ -71,6 +74,7 @@ public class TerminalPlayer extends Player {
 		}
 	}
 	
+	// Display a list of available moves if the player must move to a certain board
 	private void displayRestrictedMoves(Move move) {
 		System.out.print("Valid moves are: ");
 		for(int i = 0; i < 9; i++) {
@@ -82,6 +86,7 @@ public class TerminalPlayer extends Player {
 		System.out.println();
 	}
 	
+	// Display a list of available moves if the player can move anywhere they like
 	private void displayFreeMoves(Move move) {
 		System.out.print("Valid moves are: ");
 		for(int i = 0; i < 9; i++) {

@@ -1,5 +1,10 @@
 package com.joshuawilliams.ultimatettt;
 
+/*
+ * This class is designed to make testing the Board class easier by allowing lots of moves to 
+ * be made by defining a few arrays and calling a single method
+ */
+
 public class BoardTester {
 	
 	public static void test(Board board, Player player, int[] boards, int[] spaces) throws InvalidMoveException, MultipleMovesException {
